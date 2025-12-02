@@ -60,7 +60,7 @@ const LighterThemeFooter: React.FC = () => {
     social: [
       {
         name: "instagram",
-        href: " https://www.instagram.com/culturedatacommons",
+        href: "https://www.instagram.com/culturedatacommons",
         icon: (props: IconProps) => (
           <RiInstagramLine className="text-4xl" {...props} />
         ),
