@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Papa from "papaparse";
 import { useResourceData } from "./DataProvider";
 import { RiLoader2Line } from "react-icons/ri";
-
 
 type CsvRow = Record<string, string | number | null | undefined>;
 
@@ -25,27 +24,59 @@ function parseCsv(data: string): CsvRow[] {
 
 export default function SearchDataForm() {
   const context = useResourceData();
-  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [rows, setRows] = useState<CsvRow[] | null>(null);
 
-  const hasDataUrl = !!context?.dataUrl;
+  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fetchPromiseRef = useRef<Promise<CsvRow[] | null> | null>(null);
+
+  const dataUrl = context?.dataUrl ?? null;
+  const hasDataUrl = !!dataUrl;
+
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    setRows(null);
+    fetchPromiseRef.current = null;
+  }, [dataUrl]);
 
   const ensureRows = useCallback(async (): Promise<CsvRow[] | null> => {
-    if (!context || !hasDataUrl) return null;
+    if (!dataUrl) return null;
 
     if (rows) return rows;
 
-    const response = await fetch(context.dataUrl);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch CSV file: ${response.statusText}`);
-    }
+    if (fetchPromiseRef.current) return fetchPromiseRef.current;
 
-    const csvData = await response.text();
-    const parsed = parseCsv(csvData);
-    setRows(parsed);
-    return parsed;
-  }, [context, hasDataUrl, rows]);
+    fetchPromiseRef.current = (async () => {
+      try {
+        const response = await fetch(dataUrl);
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch CSV file: ${response.status} ${response.statusText}`
+          );
+        }
+
+        const csvData = await response.text();
+        const parsed = parseCsv(csvData);
+        setRows(parsed);
+        return parsed;
+      } catch (error) {
+        fetchPromiseRef.current = null;
+        console.error("Failed to fetch or parse CSV", error);
+        throw error;
+      }
+    })();
+
+    return fetchPromiseRef.current;
+  }, [dataUrl, rows]);
 
   const queryData = useCallback(
     async (value: string) => {
@@ -70,8 +101,8 @@ export default function SearchDataForm() {
         const csvString = Papa.unparse(matchingRows);
         context.setTableData(csvString);
         context.setCurrentPage(1);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error("Failed to query data", error);
       } finally {
         setIsLoading(false);
       }
@@ -91,8 +122,8 @@ export default function SearchDataForm() {
       const csvString = Papa.unparse(baseRows);
       context.setTableData(csvString);
       context.setCurrentPage(1);
-    } catch (err) {
-      console.error("Failed to reset table", err);
+    } catch (error) {
+      console.error("Failed to reset table", error);
     } finally {
       setIsLoading(false);
     }
@@ -110,9 +141,9 @@ export default function SearchDataForm() {
         const trimmed = value.trim();
 
         if (trimmed === "") {
-          resetTable();
+          void resetTable();
         } else {
-          queryData(trimmed);
+          void queryData(trimmed);
         }
       }, 300);
     },
@@ -125,7 +156,7 @@ export default function SearchDataForm() {
         <input
           type="text"
           placeholder="Type to search..."
-          className="w-full border border-gray-200 rounded-md p-1.5 pr-8"
+          className="w-full rounded-md border border-gray-200 p-1.5 pr-8"
           onChange={(e) => debouncedQueryData(e.target.value)}
           aria-label="Global filter"
           disabled={!context || !hasDataUrl}
