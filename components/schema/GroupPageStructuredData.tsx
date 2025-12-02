@@ -2,20 +2,20 @@ import nextSeoConfig, { imageUrl, siteTitle, url } from "@/next-seo.config";
 import { BreadcrumbJsonLd, LogoJsonLd, NextSeo, WebPageJsonLd, SiteLinksSearchBoxJsonLd } from "next-seo";
 
 export function GroupPageStructuredData() {
-  const title = "Groups"
-  const description = "Groups page of " + siteTitle
+  const title = "Collections"
+  const description = "Collections page of " + siteTitle
   return (
     <>
       <LogoJsonLd
-        url={`${url}/groups`}
+        url={`${url}/collections`}
         logo={`${url}/favicon.ico`}
       />
       <NextSeo
-        canonical={`${url}/groups`}
+        canonical={`${url}/collections`}
         title={`${title} | ${siteTitle}`}
         description={description}
         openGraph={{
-          url: `${url}/groups`,
+          url: `${url}/collections`,
           title: `${title} | ${siteTitle}`,
           description: description,
           images: [
@@ -39,22 +39,22 @@ export function GroupPageStructuredData() {
           },
           {
             position: 2,
-            name: 'Groups Page',
-            item: `${url}/groups`,
+            name: 'Collections Page',
+            item: `${url}/collections`,
           },
         ]}
       />
       <WebPageJsonLd
-        id={`${url}/groups#webpage`}
-        url={`${url}/groups`}
+        id={`${url}/collections#webpage`}
+        url={`${url}/collections`}
         name={title}
         description={description}
       />
       <SiteLinksSearchBoxJsonLd
-        url={`${url}/groups`}
+        url={`${url}/collections`}
         potentialActions={[
           {
-            target: `${url}/groups`,
+            target: `${url}/collections`,
             queryInput: "search_term_string"
           },
         ]}

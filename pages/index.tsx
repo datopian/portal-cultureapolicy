@@ -14,6 +14,7 @@ export async function getServerSideProps() {
     tags: [],
     groups: [],
     orgs: [],
+    sort: "metadata_modified desc",
   });
   const groups = await getAllGroups({ detailed: true });
   const orgs = await getAllOrganizations({ detailed: true });

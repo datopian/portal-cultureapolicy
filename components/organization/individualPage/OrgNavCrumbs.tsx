@@ -19,7 +19,7 @@ export default function OrgNavCrumbs({
             <span className="sr-only">Home</span>
           </Link>
           <Link
-            href="/organizations"
+            href="/commoners"
             className="font-semibold "
             style={{ minWidth: "fit-content" }}
           >
@@ -37,7 +37,7 @@ export default function OrgNavCrumbs({
                 d="M8.25 4.5l7.5 7.5-7.5 7.5"
               />
             </svg>
-            Organizations
+            Commoners
           </Link>
           {org.name && org.title && (
             <Link href={`/@${org.name}`} className="font-semibold ">

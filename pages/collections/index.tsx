@@ -1,9 +1,7 @@
-import Head from "next/head";
 import MiniSearch from "minisearch";
 import ListOfGroups from "../../components/groups/ListOfGroups";
 import Layout from "../../components/_shared/Layout";
 import { useState } from "react";
-import TopBar from "../../components/_shared/TopBar";
 import SearchHero from "../../components/dataset/_shared/SearchHero";
 import { Group } from "@portaljs/ckan";
 import { getAllGroups } from "@/lib/queries/groups";
@@ -43,7 +41,7 @@ function Main({
   return (
     <Layout>
       <SearchHero
-        title="Groups"
+        title="Collections"
         searchValue={searchString}
         onChange={setSearchString}
       />

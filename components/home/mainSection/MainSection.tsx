@@ -42,15 +42,17 @@ export default function MainSection({
             icon: <RiSearch2Line width={48} />,
           },
           {
-            title: "Add Data",
+            title: "Publish Data",
             description: "Make your dataset available on Portal.",
-            href: "#",
+            href: "https://culturedata.io/data/publish",
+            target:"_blank",
             icon: <RiUploadCloud2Line width={48} />,
           },
           {
             title: "Request Data",
             description: "Send us a request for the data you didn’t find.",
-            href: "#",
+            href: "https://culturedata.io/data/request",
+            target:"_blank",
             icon: <RiQuestionnaireLine width={48} />,
           },
         ].map((item, i) => (
@@ -66,7 +68,7 @@ export default function MainSection({
         <section className="relative">
           {groups.length > 4 && (
             <Link
-              href="/groups"
+              href="/collections"
               className={`${montserrat.className}  font-semibold flex items-center gap-1 uppercase hover:text-darkaccent ml-auto w-fit absolute right-0 top-[-30px]`}
             >
               View all categories

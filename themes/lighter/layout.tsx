@@ -1,11 +1,16 @@
 import React, { FC, ReactNode, useCallback } from "react";
 import styles from "./styles.module.scss";
-import { Inter } from "next/font/google";
+import { Inter, Barlow } from "next/font/google";
 import Particles from "react-particles";
 import { loadSlim } from "tsparticles-slim";
 
 const inter = Inter({
   subsets: ["latin"],
+});
+
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const LigtherTheme = ({
@@ -28,97 +33,14 @@ const LigtherTheme = ({
   }, []);
 
   return (
-    <>
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        options={{
-          particles: {
-            destroy: {
-              mode: "split",
-              split: {
-                count: 1,
-                factor: {
-                  value: {
-                    min: 2,
-                    max: 4,
-                  },
-                },
-                rate: {
-                  value: 100,
-                },
-                particles: {
-                  life: {
-                    count: 1,
-                    duration: {
-                      value: {
-                        min: 2,
-                        max: 3,
-                      },
-                    },
-                  },
-                  move: {
-                    speed: {
-                      min: 10,
-                      max: 15,
-                    },
-                  },
-                },
-              },
-            },
-            number: {
-              value: 20,
-            },
-            color: {
-              value: ["#00DEF2", "#6990BE", "#00375F", "#FFB88A"],
-            },
-            shape: {
-              type: "circle",
-            },
-            opacity: {
-              value: 0,
-            },
-            stroke: {
-              width: 1,
-            },
-
-            size: {
-              value: {
-                min: 2,
-                max: 4,
-              },
-            },
-            collisions: {
-              enable: true,
-              mode: "bounce",
-            },
-            move: {
-              enable: true,
-              speed: 1,
-              outModes: "bounce",
-            },
-          },
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "pop",
-              },
-            },
-          },
-          background: {
-            color: "transparent",
-          },
-        }}
-      />
+    <div className={`${barlow.className}`}>
       <a
         href="#main-content"
         className="absolute left-0 top-0 bg-accent text-white py-2 px-4 z-50 transform -translate-y-full focus:translate-y-0 transition"
       >
         Skip to main content
       </a>
-      <div className={` ${styles.LightTheme} ${inter.className} relative`}>
+      <div className={` ${styles.LightTheme}  relative`}>
         {Header && <Header />}
         <div className="content-wrapper">
           {Sidebar && <Sidebar />}
@@ -128,7 +50,7 @@ const LigtherTheme = ({
         </div>
         {Footer && <Footer />}
       </div>
-    </>
+    </div>
   );
 };
 

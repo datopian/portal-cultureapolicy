@@ -20,7 +20,7 @@ export default function GroupCard({
   const url = image_display_url ? new URL(image_display_url) : undefined;
   return (
     <Link
-      href={`/groups/${name}`}
+      href={`/collections/${name}`}
       className={`bg-white hover:bg-accent-50 group border-b-[4px] border-white hover:border-accent p-8 col-span-3 rounded-lg block h-full text-accent  ${theme.styles.shadowSm}`}
     >
       <Image

@@ -32,13 +32,10 @@ export default function LighterThemeHeader() {
       >
         <div className="flex items-center gap-x-12">
           <span className="sr-only">Portal</span>
-          {portalLogo ? (
             <Link href="/">
-              <Image src={portalLogo} alt="logo" height={55} width={55} />
+              <Image src={"/logo.png"} alt="logo" height={86} width={90} />
             </Link>
-          ) : (
-            <PortalDefaultLogo />
-          )}
+          
 
           <div className="hidden lg:flex lg:gap-x-12">
             <div className="flex gap-x-8 align-center">
@@ -51,20 +48,20 @@ export default function LighterThemeHeader() {
                 SEARCH
               </Link>
               <Link
-                href="/organizations"
+                href="/commoners"
                 className={`font-semibold my-auto ${
-                  router.pathname === "/organizations" ? "text-accent" : ""
+                  router.pathname === "/commoners" ? "text-accent" : ""
                 }`}
               >
-                ORGANIZATIONS
+                COMMONERS
               </Link>
               <Link
-                href="/groups"
+                href="/collections"
                 className={`font-semibold my-auto ${
-                  router.pathname === "/groups" ? "text-accent" : ""
+                  router.pathname === "/collections" ? "text-accent" : ""
                 }`}
               >
-                GROUPS
+                COLLECTIONS
               </Link>
             </div>
           </div>
@@ -113,11 +110,11 @@ export default function LighterThemeHeader() {
                 <Link href="/search" className="font-semibold my-auto">
                   DATASETS
                 </Link>
-                <Link href="/organizations" className="font-semibold my-auto">
-                  ORGS
+                <Link href="/commoners" className="font-semibold my-auto">
+                  COMMONERS
                 </Link>
-                <Link href="/groups" className="font-semibold my-auto">
-                  GROUPS
+                <Link href="/collections" className="font-semibold my-auto">
+                  COLLECTIONS
                 </Link>
               </div>
             </div>

@@ -71,12 +71,12 @@ export async function searchDatasets(options: PackageSearchOptions) {
     "&"
   )}&facet.field=[${facetFields}]&facet.limit=9999`;
 
-  const res = await CkanRequest.get<CkanResponse<{ results: Dataset[], count: number }>>(
+  const res = await CkanRequest.get<CkanResponse<{ results: Dataset[], count: number, search_facets:any }>>(
     action,
     { ckanUrl: DMS }
   );
 
-  return { ...res.result, datasets: res.result.results };
+  return { ...res.result, datasets: res.result.results, search_facets: res.result.search_facets };
 }
 
 const joinTermsWithOr = (tems) => {

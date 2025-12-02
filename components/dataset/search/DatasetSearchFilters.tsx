@@ -30,7 +30,7 @@ export default function DatasetSearchFilters() {
         <FacetCard
           title={
             <>
-              Refine by <span className="text-accent">Organization</span>
+              Refine by <span className="text-accent">Commoners</span>
             </>
           }
           showClear={options.orgs.length > 0}
@@ -76,7 +76,7 @@ export default function DatasetSearchFilters() {
           <FacetCard
             title={
               <>
-                Refine by <span className="text-accent">Theme</span>
+                Refine by <span className="text-accent">Collections</span>
               </>
             }
             showClear={options.groups.length > 0}

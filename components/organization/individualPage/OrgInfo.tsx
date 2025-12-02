@@ -1,8 +1,8 @@
 import getConfig from "next/config";
 import Image from "next/image";
-import { Tag } from "ckan";
-import { Organization } from "ckan";
+
 import { getTimeAgo } from "@/lib/utils";
+import { Organization, Tag } from "@portaljs/ckan";
 
 export default function OrgInfo({ org }: { org: Organization }) {
   const url = org.image_display_url

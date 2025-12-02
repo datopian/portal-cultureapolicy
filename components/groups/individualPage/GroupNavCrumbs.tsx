@@ -18,7 +18,7 @@ export default function GroupNavCrumbs({
             <RiHome3Line />
           </Link>
           <Link
-            href="/groups"
+            href="/collections"
             className="font-semibold "
             style={{ minWidth: "fit-content" }}
           >
@@ -36,10 +36,10 @@ export default function GroupNavCrumbs({
                 d="M8.25 4.5l7.5 7.5-7.5 7.5"
               />
             </svg>
-            Groups
+            Collections
           </Link>
           {group.name && group.title && (
-            <Link href={`/groups/${group.name}`} className="font-semibold ">
+            <Link href={`/collections/${group.name}`} className="font-semibold ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -20,7 +20,7 @@ export default function DatasetOverview({ dataset }: { dataset: Dataset }) {
         </p>
       </div>
       <div className="  pb-5">
-        <h4 className="pb-1 text-xs label-txt tracking-wider">GROUP</h4>
+        <h4 className="pb-1 text-xs label-txt tracking-wider">COLLECTIONS</h4>
         <p className="font-semibold">
           {dataset.groups.length > 0
             ? dataset.groups.map((group) => group.title).join(", ")

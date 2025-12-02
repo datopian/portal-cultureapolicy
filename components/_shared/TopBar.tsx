@@ -28,13 +28,13 @@ export default function Example() {
                 DATASETS
               </Link>
               <Link
-                href="/organizations"
+                href="/commoners"
                 className="font-semibold text-white my-auto"
               >
                 ORGS
               </Link>
-              <Link href="/groups" className="font-semibold text-white my-auto">
-                GROUPS
+              <Link href="/collections" className="font-semibold text-white my-auto">
+                COLLECTIONS
               </Link>
             </li>
           </div>
@@ -87,16 +87,16 @@ export default function Example() {
                   DATASETS
                 </Link>
                 <Link
-                  href="/organizations"
+                  href="/commoners"
                   className="font-semibold text-white my-auto"
                 >
                   ORGS
                 </Link>
                 <Link
-                  href="/groups"
+                  href="/collections"
                   className="font-semibold text-white my-auto"
                 >
-                  GROUPS
+                  Collections
                 </Link>
               </div>
             </div>
