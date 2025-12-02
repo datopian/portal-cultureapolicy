@@ -27,6 +27,8 @@ const GeoJSONView = ({ name, url }: GeoJSONViewProps) => {
   const [zoom, setZoom] = useState<number>(2);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     const fetchData = async () => {
       try {
         const response = await fetch(url);
