@@ -36,11 +36,12 @@ const GeoJSONView = ({ name, url }: GeoJSONViewProps) => {
           throw new Error(`Failed to fetch GeoJSON: ${response.statusText}`);
         }
         const geoJsonData = await response.json();
-        setData(geoJsonData);
 
         if (!geoJsonData || !geoJsonData.type) {
           throw new Error("Invalid GeoJSON format");
         }
+
+        setData(geoJsonData);
 
         try {
           const box = bbox(geoJsonData);
