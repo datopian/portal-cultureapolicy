@@ -38,26 +38,37 @@ const GeoJSONView = ({ name, url }: GeoJSONViewProps) => {
         const geoJsonData = await response.json();
         setData(geoJsonData);
 
-        const box = bbox(geoJsonData);
-        const c = center(geoJsonData);
+        if (!geoJsonData || !geoJsonData.type) {
+          throw new Error("Invalid GeoJSON format");
+        }
 
-        setCenterCoords({
-          longitude: c.geometry.coordinates[0],
-          latitude: c.geometry.coordinates[1],
-        });
+        try {
+          const box = bbox(geoJsonData);
+          const c = center(geoJsonData);
 
-        const lonDiff = box[2] - box[0];
-        const latDiff = box[3] - box[1];
-        const maxDiff = Math.max(lonDiff, latDiff);
+          setCenterCoords({
+            longitude: c.geometry.coordinates[0],
+            latitude: c.geometry.coordinates[1],
+          });
 
-        let z = 4;
-        if (maxDiff < 0.5) z = 12;
-        else if (maxDiff < 1) z = 10;
-        else if (maxDiff < 5) z = 8;
-        else if (maxDiff < 20) z = 6;
-        else z = 4;
+          const lonDiff = box[2] - box[0];
+          const latDiff = box[3] - box[1];
+          const maxDiff = Math.max(lonDiff, latDiff);
 
-        setZoom(z);
+          let z: number;
+          if (!isFinite(maxDiff) || maxDiff <= 0) {
+            z = 4; 
+          } else if (maxDiff < 0.5) {
+            z = 12;
+          } else if (maxDiff < 1) z = 10;
+          else if (maxDiff < 5) z = 8;
+          else if (maxDiff < 20) z = 6;
+          else z = 4;
+
+          setZoom(z);
+        } catch (turfError) {
+          console.error("Error calculating bbox/center:", turfError);
+        }
       } catch (error) {
         console.error("Error fetching GeoJSON data:", error);
         setError(
