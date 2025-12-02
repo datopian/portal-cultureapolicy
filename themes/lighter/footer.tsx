@@ -67,8 +67,7 @@ const LighterThemeFooter: React.FC = () => {
       },
       {
         name: "email",
-        href: "https://culturedata.io/contact/ ",
-        // eslint-disable-next-line
+        href: "https://culturedata.io/contact",
         icon: (props: IconProps) => (
           <RiMailLine className="text-4xl" {...props} />
         ),
@@ -91,6 +90,7 @@ const LighterThemeFooter: React.FC = () => {
                 <li key={item.name}>
                   <Link
                     target={item.target}
+                    rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                     href={item.href}
                     className="font-roboto font-normal hover:text-accent transition-all"
                   >
@@ -109,6 +109,7 @@ const LighterThemeFooter: React.FC = () => {
                   <Link
                     href={item.href}
                     target={item.target}
+                    rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                     className="font-roboto font-normal hover:text-accent transition-all"
                   >
                     {item.name}
@@ -125,6 +126,7 @@ const LighterThemeFooter: React.FC = () => {
                 <li key={item.name}>
                   <Link
                     target={item.target}
+                    rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                     href={item.href}
                     className="font-roboto font-normal hover:text-accent transition-all"
                   >
@@ -143,6 +145,7 @@ const LighterThemeFooter: React.FC = () => {
                 key={item.name}
                 href={item.href}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="transition-all hover:text-accent"
               >
                 <span className="sr-only">{item.name}</span>

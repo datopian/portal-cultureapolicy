@@ -6,6 +6,9 @@ interface Props {
 }
 
 const MarkdownRenderer: React.FC<Props> = ({ content }) => {
+  if (!content) {
+    return null;
+  }
   return (
     <div >
       <ReactMarkdown

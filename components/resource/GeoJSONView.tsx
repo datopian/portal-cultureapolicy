@@ -3,13 +3,19 @@ import { useEffect, useState } from "react";
 import bbox from "@turf/bbox";
 import center from "@turf/center";
 
+interface GeoJSONViewProps {
+  name: string;
+  url: string;
+}
+
 const MapViewer = dynamic(
   () => import("@portaljs/components").then((mod) => mod.Map),
   { ssr: false }
 );
 
-const GeoJSONView = ({ name, url }) => {
+const GeoJSONView = ({ name, url }: GeoJSONViewProps) => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<any>(null);
   const [centerCoords, setCenterCoords] = useState<{
     latitude: number;
@@ -24,6 +30,9 @@ const GeoJSONView = ({ name, url }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch GeoJSON: ${response.statusText}`);
+        }
         const geoJsonData = await response.json();
         setData(geoJsonData);
 
@@ -49,6 +58,9 @@ const GeoJSONView = ({ name, url }) => {
         setZoom(z);
       } catch (error) {
         console.error("Error fetching GeoJSON data:", error);
+        setError(
+          error instanceof Error ? error.message : "Failed to load map data"
+        );
       } finally {
         setLoading(false);
       }
@@ -59,6 +71,8 @@ const GeoJSONView = ({ name, url }) => {
 
   return loading ? (
     <div className="text-sm">Loading map...</div>
+  ) : error ? (
+    <div className="text-sm">Error: {error}</div>
   ) : (
     <MapViewer
       center={centerCoords}

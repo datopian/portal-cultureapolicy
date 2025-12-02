@@ -1,5 +1,4 @@
 import { useTheme } from "@/components/theme/theme-provider";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function ActionCard({
@@ -8,18 +7,21 @@ export default function ActionCard({
   icon,
   href,
   target="_self",
+  rel
 }: {
   title: string;
   description: string;
   icon: React.ReactNode;
   href: string;
   target?: string;
+  rel?: string;
 }) {
   const { theme } = useTheme();
   return (
     <Link
       href={href}
       target={target}
+      rel={rel}
       className={`w-full group border-b-[4px] border-white hover:border-accent hover:bg-accent-50 bg-[var(--background-color)] ${theme.styles.shadowMd} flex flex-col items-center py-10 lg:py-16  px-5 lg:px-4 text-center rounded-[10px]`}
     >
       {icon && (

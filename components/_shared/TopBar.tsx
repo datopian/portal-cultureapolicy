@@ -90,13 +90,13 @@ export default function Example() {
                   href="/commoners"
                   className="font-semibold text-white my-auto"
                 >
-                  ORGS
+                  COMMONERS
                 </Link>
                 <Link
                   href="/collections"
                   className="font-semibold text-white my-auto"
                 >
-                  Collections
+                  COLLECTIONS
                 </Link>
               </div>
             </div>

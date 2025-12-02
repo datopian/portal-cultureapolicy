@@ -138,7 +138,7 @@ export default function DatasetInfo({
         </div>
         {isTruncated && (
           <button
-            onClick={() => onReadMore()}
+            onClick={() => onReadMore?.()}
             className="mt-2 border-b border-accent text-stone-500 hover:text-accent"
           >
             read more

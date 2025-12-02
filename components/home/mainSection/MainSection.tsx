@@ -46,6 +46,7 @@ export default function MainSection({
             description: "Make your dataset available on Portal.",
             href: "https://culturedata.io/data/publish",
             target:"_blank",
+            rel:"noopener noreferrer",
             icon: <RiUploadCloud2Line width={48} />,
           },
           {
@@ -53,6 +54,7 @@ export default function MainSection({
             description: "Send us a request for the data you didn’t find.",
             href: "https://culturedata.io/data/request",
             target:"_blank",
+            rel:"noopener noreferrer",
             icon: <RiQuestionnaireLine width={48} />,
           },
         ].map((item, i) => (

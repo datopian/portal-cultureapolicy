@@ -1,12 +1,6 @@
-import React, { FC, ReactNode, useCallback } from "react";
+import React, { FC, ReactNode } from "react";
 import styles from "./styles.module.scss";
 import { Inter, Barlow } from "next/font/google";
-import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim";
-
-const inter = Inter({
-  subsets: ["latin"],
-});
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -24,13 +18,7 @@ const LigtherTheme = ({
   Footer?: FC;
   children: ReactNode;
 }) => {
-  const particlesInit = useCallback(async (engine) => {
-    await loadSlim(engine);
-  }, []);
 
-  const particlesLoaded = useCallback(async (container) => {
-    // await console.log(container);
-  }, []);
 
   return (
     <div className={`${barlow.className}`}>
