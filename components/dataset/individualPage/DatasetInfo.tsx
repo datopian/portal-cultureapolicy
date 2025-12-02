@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Dataset, Resource, Tag } from "@portaljs/ckan";
 import { ArrowDownTrayIcon } from "@heroicons/react/20/solid";
-import { getTimeAgo } from "@/lib/utils";
+import { getTimeAgo, normalizeGroupName } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import MarkdownRenderer from "@/components/_shared/Markdown";
 import { RiFolder2Line, RiGroupLine, RiLinksLine } from "react-icons/ri";
@@ -119,7 +119,7 @@ export default function DatasetInfo({
               Collections:{" "}
               {dataset.groups?.map((group, i) => (
                 <>
-                  <Link key={group.name} href={`/collections/${group.name}`} className="border-b border-accent mr-1 hover:text-accent">
+                  <Link key={group.name} href={`/collections/${normalizeGroupName(group.name)}`} className="border-b border-accent mr-1 hover:text-accent">
                     {group.title}
                   </Link>
                   {i < dataset.groups.length - 1 ? ", " : ""}
