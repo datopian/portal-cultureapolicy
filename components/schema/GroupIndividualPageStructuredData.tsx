@@ -4,7 +4,7 @@ import { BreadcrumbJsonLd, LogoJsonLd, NextSeo, WebPageJsonLd } from "next-seo";
 
 export function GroupIndividualPageStructuredData({ group }: { group: Group }) {
   const title = group.title || group.name
-  const groupUrl = `${url}/groups/${group.name}`
+  const groupUrl = `${url}/collections/${group.name}`
   const description = group.description || "Group page of " + title
   const image = group.image_display_url || imageUrl
 
@@ -43,8 +43,8 @@ export function GroupIndividualPageStructuredData({ group }: { group: Group }) {
           },
           {
             position: 2,
-            name: 'Groups Page',
-            item: `${url}/groups`,
+            name: 'Collections Page',
+            item: `${url}/collections`,
           },
           {
             position: 3,

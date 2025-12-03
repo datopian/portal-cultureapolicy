@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
     ],
     useful: [
       { name: "Datasets", href: "/search" },
-      { name: "Groups", href: "/groups" },
+      { name: "Collections", href: "/collections" },
     ],
     social: [
       {

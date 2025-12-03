@@ -7,11 +7,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { RiArrowLeftLine } from "react-icons/ri";
 import ResourcesBadges from "@/components/dataset/_shared/ResourcesBadges";
-import Head from "next/head";
 import { PrimeReactProvider } from "primereact/api";
 import ResponsiveGridData from "@/components/responsiveGrid";
 import { getTimeAgo } from "@/lib/utils";
 import { ResourcePageStructuredData } from "@/components/schema/ResourcePageStructuredData";
+import GeoJSONView from "@/components/resource/GeoJSONView";
 
 const PdfViewer = dynamic(
   () => import("@portaljs/components").then((mod) => mod.PdfViewer),
@@ -20,11 +20,6 @@ const PdfViewer = dynamic(
 
 const ExcelViewer = dynamic(
   () => import("@portaljs/components").then((mod) => mod.Excel),
-  { ssr: false }
-);
-
-const MapViewer = dynamic(
-  () => import("@portaljs/components").then((mod) => mod.Map),
   { ssr: false }
 );
 
@@ -69,10 +64,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 export default function ResourcePage({
   resource,
-  orgName
+  orgName,
 }: {
   resource: Resource;
-  orgName: string
+  orgName: string;
 }): JSX.Element {
   const resourceFormat = resource.format.toLowerCase();
   const router = useRouter();
@@ -80,7 +75,11 @@ export default function ResourcePage({
 
   return (
     <PrimeReactProvider>
-      <ResourcePageStructuredData resource={resource} orgName={orgName} dataset={dataset} />
+      <ResourcePageStructuredData
+        resource={resource}
+        orgName={orgName}
+        dataset={dataset as string}
+      />
       <Layout>
         <div className="custom-container pt-[30px]">
           <Link
@@ -125,8 +124,7 @@ export default function ResourcePage({
                       d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
                     />
                   </svg>
-                  Created: {resource.created &&
-                    getTimeAgo(resource.created)}
+                  Created: {resource.created && getTimeAgo(resource.created)}
                 </span>
                 <span className="font-medium text-gray-500 inline">
                   <svg
@@ -204,11 +202,9 @@ export default function ResourcePage({
                 {["xlsx", "xls"].includes(resourceFormat) && (
                   <ExcelViewer url={resource.url} />
                 )}
+
                 {resourceFormat?.toLocaleLowerCase() == "geojson" && (
-                  <MapViewer
-                    layers={[{ data: resource.url, name: "Geojson" }]}
-                    title={resource.name}
-                  />
+                  <GeoJSONView name={resource.name} url={resource.url}/>
                 )}
                 {resource?.iframe && (
                   <iframe

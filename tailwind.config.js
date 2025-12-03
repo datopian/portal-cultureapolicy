@@ -2,7 +2,7 @@ const colors = require("tailwindcss/colors");
 const Color = require("color");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-const themeColor = process.env.NEXT_PUBLIC_THEME_COLOR || "#4977AB";
+const themeColor = process.env.NEXT_PUBLIC_THEME_COLOR || "#4F53FA";
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [

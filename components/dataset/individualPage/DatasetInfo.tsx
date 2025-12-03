@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { Dataset, Resource, Tag } from "@portaljs/ckan";
 import { ArrowDownTrayIcon } from "@heroicons/react/20/solid";
-import { getTimeAgo } from "@/lib/utils";
+import { getTimeAgo, normalizeGroupName } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
+import MarkdownRenderer from "@/components/_shared/Markdown";
+import { RiFolder2Line, RiGroupLine, RiLinksLine } from "react-icons/ri";
 
 function uniqueFormat(resources) {
   const formats = resources.map((item: Resource) => item.format);
@@ -10,14 +13,31 @@ function uniqueFormat(resources) {
 
 export default function DatasetInfo({
   dataset,
+  onReadMore,
 }: {
   dataset: Dataset & { _name: string };
+  onReadMore?: () => void;
 }) {
+  const [isTruncated, setIsTruncated] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  const description =
+    dataset.notes?.replace(/<\/?[^>]+(>|$)/g, "") || "No description";
+
   const metaFormats = [
     { format: "jsonld", label: "JSON-LD" },
     { format: "rdf", label: "RDF" },
     { format: "ttl", label: "TTL" },
   ];
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (el) {
+      requestAnimationFrame(() => {
+        setIsTruncated(el.scrollHeight > el.clientHeight);
+      });
+    }
+  }, [dataset.notes]);
 
   return (
     <div className="flex flex-col">
@@ -92,11 +112,38 @@ export default function DatasetInfo({
           Updated:{" "}
           {dataset.metadata_modified && getTimeAgo(dataset.metadata_modified)}
         </span>
+        {dataset.groups.length > 0 && (
+          <span className="font-medium text-gray-500 inline">
+            <RiLinksLine className="text-[20px] text-accent inline mr-1" />
+            <span>
+              Collections:{" "}
+              {dataset.groups?.map((group, i) => (
+                <>
+                  <Link key={group.name} href={`/collections/${normalizeGroupName(group.name)}`} className="border-b border-accent mr-1 hover:text-accent">
+                    {group.title}
+                  </Link>
+                  {i < dataset.groups.length - 1 ? ", " : ""}
+                </>
+              ))}
+            </span>
+          </span>
+        )}
       </div>
       <div className="py-4 my-4 border-y">
-        <p className="text-sm font-normal text-stone-500 line-clamp-4">
-          {dataset.notes?.replace(/<\/?[^>]+(>|$)/g, "") || "No description"}
-        </p>
+        <div
+          ref={textRef}
+          className={`text-sm font-normal text-stone-500 transition-all line-clamp-3`}
+        >
+          <MarkdownRenderer content={description} />
+        </div>
+        {isTruncated && (
+          <button
+            onClick={() => onReadMore?.()}
+            className="mt-2 border-b border-accent text-stone-500 hover:text-accent"
+          >
+            read more
+          </button>
+        )}
       </div>
       <div className="flex flex-wrap gap-1">
         {dataset.tags?.map((tag: Tag) => (

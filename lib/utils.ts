@@ -20,3 +20,15 @@ export function getTimeAgo(timestamp: string) {
 
   return format(date);
 }
+
+const GROUP_MARKER = "-group--" as const;
+
+export function normalizeGroupName(name: string): string {
+  const index = name.indexOf(GROUP_MARKER);
+
+  if (index === -1) {
+    return name;
+  }
+
+  return name.slice(index + GROUP_MARKER.length);
+}

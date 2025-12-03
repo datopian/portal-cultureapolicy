@@ -1,6 +1,6 @@
+import { Organization } from "@portaljs/ckan";
 import getConfig from "next/config";
 import Image from "next/image";
-import { Organization } from "ckan";
 import styles from "styles/DatasetInfo.module.scss";
 
 type OrganizationInfoProps = Pick<

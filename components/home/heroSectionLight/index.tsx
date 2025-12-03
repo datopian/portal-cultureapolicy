@@ -2,11 +2,7 @@ import Link from "next/link";
 import SearchForm from "./SearchForm";
 
 import { Poppins } from "next/font/google";
-import {
-  RiFileCopy2Line,
-  RiFunctionLine,
-  RiTeamLine,
-} from "react-icons/ri";
+import { RiFileCopy2Line, RiFunctionLine, RiTeamLine } from "react-icons/ri";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,12 +17,12 @@ export default function HeroSectionLight({ stats }) {
           <div className="lg:max-w-[478px]">
             <h1 className="font-black text-[40px] md:text-[55px] flex flex-col leading-[50px] md:leading-[65px]">
               <span>Find and Share</span>
-              <span className="text-accent">Quality Data.</span>
+              <span className="text-accent">Culture Data.</span>
             </h1>
             <p className="text-[16px] md:text-[20px] text-[var(--text-gray)] mt-[10px] mb-[30px]">
-              At Portal, we have over thousands of datasets for free and a
-              Premium Data Service for additional or customised data with
-              guaranteed updates.
+              The Commons is a collaborative system that makes data on arts and
+              culture accessible, reliable, and empowering through technology,
+              education, and shared stewardship.
             </p>
 
             <SearchForm />
@@ -51,7 +47,7 @@ export default function HeroSectionLight({ stats }) {
               </div>
             </Link>
             <Link
-              href="/groups"
+              href="/collections"
               className="flex items-center gap-[20px] hover:text-accent transition-all"
             >
               <span className="text-accent">
@@ -63,12 +59,12 @@ export default function HeroSectionLight({ stats }) {
                   {stats.groupCount}
                 </span>
                 <span className="text-[16px] leading-[24px]">
-                  Group{stats.groupCount > 1 ? "s" : ""}
+                  Collection{stats.groupCount > 1 ? "s" : ""}
                 </span>
               </div>
             </Link>
             <Link
-              href="/organizations"
+              href="/commoners"
               className="flex items-center gap-[20px] hover:text-accent transition-all"
             >
               <span className="text-accent">
@@ -79,7 +75,7 @@ export default function HeroSectionLight({ stats }) {
                   {stats.orgCount}
                 </span>
                 <span className="text-[16px] leading-[24px]">
-                  Organization{stats.orgCount > 1 ? "s" : ""}
+                  Commoner{stats.orgCount > 1 ? "s" : ""}
                 </span>
               </div>
             </Link>

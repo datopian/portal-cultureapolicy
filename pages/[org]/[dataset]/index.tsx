@@ -13,6 +13,7 @@ import { publicToPrivateDatasetName } from "@/lib/queries/utils";
 import { getDataset } from "@/lib/queries/dataset";
 import HeroSection from "@/components/_shared/HeroSection";
 import { DatasetPageStructuredData } from "@/components/schema/DatasetPageStructuredData";
+import { useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const ckan = new CKAN(process.env.NEXT_PUBLIC_DMS);
@@ -59,6 +60,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function DatasetPage({ dataset }): JSX.Element {
+  const [selectedTab, setSelectedTab] = useState(0);
+
   const tabs = [
     {
       id: "resources",
@@ -86,6 +89,9 @@ export default function DatasetPage({ dataset }): JSX.Element {
       title: "Activity Stream",
     },
   ];
+
+  const infoTabIndex = tabs.findIndex((t) => t.id === "information");
+
   return (
     <>
       <DatasetPageStructuredData dataset={dataset} />
@@ -106,9 +112,18 @@ export default function DatasetPage({ dataset }): JSX.Element {
             <div className="custom-container">
               {dataset && (
                 <main className={styles.main}>
-                  <DatasetInfo dataset={dataset} />
+                  <DatasetInfo
+                    dataset={dataset}
+                    onReadMore={() =>
+                      setSelectedTab(infoTabIndex === -1 ? 0 : infoTabIndex)
+                    }
+                  />
                   <div>
-                    <Tabs items={tabs} />
+                    <Tabs
+                      items={tabs}
+                      selectedIndex={selectedTab}
+                      onChange={setSelectedTab}
+                    />
                   </div>
                 </main>
               )}
