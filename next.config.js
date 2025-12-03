@@ -1,11 +1,13 @@
 // const { withContentlayer } = require("next-contentlayer");
 
 /** @type {import('next').NextConfig} */
+
 const domains = [
   "demo.dev.datopian.com",
   "api.dev.cloud.portaljs",
   "blob.datopian.com",
 ];
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -22,6 +24,15 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     DOMAINS: domains, // Make domains accessible at runtime
+  },
+  async redirects() {
+    return [
+      {
+        source: '/groups/:slug',
+        destination: '/collections/:slug',
+        permanent: true,
+      }
+    ];
   },
 };
 

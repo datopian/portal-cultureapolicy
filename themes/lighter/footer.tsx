@@ -21,6 +21,7 @@ const LighterThemeFooter: React.FC = () => {
       {
         name: "Our Strategy",
         href: "https://portaljs.com",
+        target: "_blank",
       },
       {
         name: "Our Council",
@@ -158,7 +159,16 @@ const LighterThemeFooter: React.FC = () => {
       <div
         className={`custom-container flex flex-col flex-wrap py-6 mx-auto md:items-center lg:items-start md:flex-row md:flex-nowrap`}
       >
-  
+        <div className="md:ml-auto mt-4 md:mt-0">
+          <a
+            className="flex flex-col md:flex-row items-center gap-1"
+            href="https://portaljs.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="text-sm">Built with</span><span className="font-extrabold text-[#1f2937] text-xl sm:text-lg font-roboto ">🌀 PortalJS</span>
+          </a>
+        </div>
       </div>
     </footer>
   );
