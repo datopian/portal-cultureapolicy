@@ -32,16 +32,15 @@ export default function LighterThemeHeader() {
       >
         <div className="flex items-center gap-x-12">
           <span className="sr-only">Portal</span>
-            <Link href="/">
-              <Image src={"/logo.png"} alt="logo" height={86} width={91} />
-            </Link>
-          
+          <Link href="/">
+            <Image src={"/logo.png"} alt="logo" width={300} height={86} />
+          </Link>
 
           <div className="hidden lg:flex lg:gap-x-12">
             <div className="flex gap-x-8 align-center">
               <Link
                 href="/search"
-                className={`font-semibold my-auto ${
+                className={`font-semibold my-auto hover:text-accent transition ${
                   router.pathname === "/search" ? "text-accent" : ""
                 }`}
               >
@@ -49,7 +48,7 @@ export default function LighterThemeHeader() {
               </Link>
               <Link
                 href="/commoners"
-                className={`font-semibold my-auto ${
+                className={`font-semibold my-auto hover:text-accent transition ${
                   router.pathname === "/commoners" ? "text-accent" : ""
                 }`}
               >
@@ -57,7 +56,7 @@ export default function LighterThemeHeader() {
               </Link>
               <Link
                 href="/collections"
-                className={`font-semibold my-auto ${
+                className={`font-semibold my-auto hover:text-accent transition ${
                   router.pathname === "/collections" ? "text-accent" : ""
                 }`}
               >
@@ -90,8 +89,8 @@ export default function LighterThemeHeader() {
             <Link href="/" className="-m-1.5 p-1.5 inline-block md:hidden">
               <Image
                 src="/images/logos/logo.svg"
-                width={55}
-                height={55}
+                width={300}
+                height={86}
                 alt="Portal"
               />
             </Link>
@@ -107,13 +106,13 @@ export default function LighterThemeHeader() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6 flex flex-col">
-                <Link href="/search" className="font-semibold my-auto">
+                <Link href="/search" className="font-semibold my-auto hover:text-accent transition">
                   DATASETS
                 </Link>
-                <Link href="/commoners" className="font-semibold my-auto">
+                <Link href="/commoners" className="font-semibold my-auto hover:text-accent transition">
                   COMMONERS
                 </Link>
-                <Link href="/collections" className="font-semibold my-auto">
+                <Link href="/collections" className="font-semibold my-auto hover:text-accent transition">
                   COLLECTIONS
                 </Link>
               </div>

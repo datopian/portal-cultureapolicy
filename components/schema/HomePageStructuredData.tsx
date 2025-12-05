@@ -9,7 +9,7 @@ export function HomePageStructuredData() {
         logo={`${url}/favicon.ico`}
       />
       <NextSeo
-        title={`${siteTitle} | ${title}`}
+        title={`${siteTitle}`}
         {...nextSeoConfig}
       />
       <BreadcrumbJsonLd

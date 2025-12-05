@@ -1,15 +1,15 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-export const siteTitle = "PortalJS Open Data Portal";
-export const title = "PortalJS";
+export const siteTitle = "Culture Data Commons";
+export const title = "Culture Data Commons";
 export const description =
-  "Discover thousands of datasets, publish your own, and request data via Portal – an open data platform powered by PortalJS.";
+  "The Commons is a collaborative system that makes data on arts and culture accessible, reliable, and empowering through technology, education, and shared stewardship.";
 
 export const url = "https://portaljs-cloud-frontend-template.vercel.app";
 export const imageUrl = `${url}/images/portaljs-frontend.png`;
 
 export default {
-  defaultTitle: `${siteTitle} | ${title}`,
+  defaultTitle: `${siteTitle}`,
   siteTitle,
   description,
   canonical: url,
@@ -29,11 +29,6 @@ export default {
         type: "image/png",
       },
     ],
-  },
-  twitter: {
-    handle: "@datopian",
-    site: "@PortalJS_",
-    cardType: "summary_large_image",
   },
   additionalMetaTags: [
     {
