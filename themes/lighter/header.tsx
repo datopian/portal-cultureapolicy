@@ -33,7 +33,7 @@ export default function LighterThemeHeader() {
         <div className="flex items-center gap-x-12">
           <span className="sr-only">Portal</span>
           <Link href="/">
-            <Image src={"/logo.png"} alt="logo" width={300} height={86} />
+            <Image src={"/logo.png"} alt="logo" width={273} height={78} />
           </Link>
 
           <div className="hidden lg:flex lg:gap-x-12">
