@@ -4,6 +4,7 @@ import ResourcesBadges from "../_shared/ResourcesBadges";
 import { RiMapPinTimeLine, RiOrganizationChart } from "react-icons/ri";
 import { getDatasetName, getTimeAgo } from "@/lib/utils";
 import { useTheme } from "@/components/theme/theme-provider";
+import { privateToPublicOrgName } from "@/lib/queries/utils";
 
 export default function DatasetItem({
   dataset,
@@ -16,9 +17,11 @@ export default function DatasetItem({
     theme: { styles },
   } = useTheme();
 
+  const organizationName = privateToPublicOrgName(dataset.organization.name)
+
   return (
     <Link
-      href={`/@${dataset.organization.name}/${getDatasetName(dataset.name)}`}
+      href={`/@${organizationName}/${getDatasetName(dataset.name)}`}
       className={`flex items-start gap-4 hover:bg-white hover:shadow-lg transition-all p-4 rounded-[10px] ${styles.shadowMd}`}
     >
       <span className="min-w-[5px] min-h-[5px] bg-accent rounded-full mt-3 hidden"></span>

@@ -3,6 +3,7 @@ import { Dataset } from "@portaljs/ckan";
 import MultipleResourcesCard from "../_shared/MultipleResourcesCard";
 import { resourceBgColors } from "../_shared/FormatsColors";
 import { getTimeAgo } from "@/lib/utils";
+import { privateToPublicOrgName } from "@/lib/queries/utils";
 
 const mainOrg = process.env.NEXT_PUBLIC_ORG;
 
@@ -29,10 +30,11 @@ export default function DatasetCard({
           <>
             {showOrg !== false && (
               <span
-                className={`${resourceBgColors[
-                  dataset.resources[0].format?.toUpperCase() as keyof typeof resourceBgColors
-                ]
-                  } px-2 py-1 rounded-full text-xs flex items-center gap-1`}
+                className={`${
+                  resourceBgColors[
+                    dataset.resources[0].format?.toUpperCase() as keyof typeof resourceBgColors
+                  ]
+                } px-2 py-1 rounded-full text-xs flex items-center gap-1`}
               >
                 <img src="/images/icons/org.svg" alt="" />
                 {dataset.organization
@@ -41,29 +43,32 @@ export default function DatasetCard({
               </span>
             )}
             <span
-              className={`${resourceBgColorsProxy[
-                dataset.resources[0].format?.toUpperCase() as keyof typeof resourceBgColors
-              ]
-                } px-2 py-1 rounded-full text-xs flex items-center gap-1`}
+              className={`${
+                resourceBgColorsProxy[
+                  dataset.resources[0].format?.toUpperCase() as keyof typeof resourceBgColors
+                ]
+              } px-2 py-1 rounded-full text-xs flex items-center gap-1`}
             >
               <img src="/images/icons/clock.svg" alt="" />
-              {dataset.metadata_modified && getTimeAgo(dataset.metadata_modified)}
+              {dataset.metadata_modified &&
+                getTimeAgo(dataset.metadata_modified)}
             </span>
           </>
         )) || (
-            <>
-              {showOrg !== false && (
-                <span className="bg-gray-200 px-4 py-1 rounded-full text-xs">
-                  {dataset.organization
-                    ? dataset.organization.title
-                    : "No organization"}
-                </span>
-              )}
+          <>
+            {showOrg !== false && (
               <span className="bg-gray-200 px-4 py-1 rounded-full text-xs">
-                {dataset.metadata_modified && getTimeAgo(dataset.metadata_modified)}
+                {dataset.organization
+                  ? dataset.organization.title
+                  : "No organization"}
               </span>
-            </>
-          )}
+            )}
+            <span className="bg-gray-200 px-4 py-1 rounded-full text-xs">
+              {dataset.metadata_modified &&
+                getTimeAgo(dataset.metadata_modified)}
+            </span>
+          </>
+        )}
       </div>
     );
   }
@@ -73,8 +78,10 @@ export default function DatasetCard({
       ? dataset.name?.split(`${mainOrg}--`)[1]
       : dataset.name;
 
+  const organizationName = privateToPublicOrgName(dataset.organization.name);
+
   return (
-    <Link href={`/@${dataset.organization.name}/${datasetName}`} className="">
+    <Link href={`/@${organizationName}/${datasetName}`} className="">
       <article className="grid grid-cols-1 md:grid-cols-7 gap-x-2 mb-6">
         <MultipleResourcesCard resources={dataset.resources} />
         <div className="col-span-6 place-content-start flex flex-col gap-1 mt-4 lg:mt-0 ml-0 lg:ml-4">
