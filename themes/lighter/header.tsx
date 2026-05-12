@@ -30,7 +30,7 @@ export default function LighterThemeHeader() {
         className={`mx-auto py-4 flex custom-container items-center justify-between  ${theme.styles.containerWide}`}
         aria-label="Global"
       >
-        <div className="flex items-center gap-x-12">
+        <div className="flex items-center gap-x-12 mt-6">
           <span className="sr-only">Portal</span>
           <Link href="/">
             <Image src={"/logo.png"} alt="logo" width={273} height={78} />
