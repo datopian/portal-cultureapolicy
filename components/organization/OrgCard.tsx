@@ -16,7 +16,15 @@ export default function GroupCard({
   description,
   name,
 }: OrgCardProps) {
-  const url = image_display_url ? new URL(image_display_url) : undefined;
+  let url: URL | undefined;
+  if (image_display_url) {
+    try {
+      url = new URL(image_display_url);
+    } catch {
+      url = undefined;
+    }
+  }
+
   const logoSrc =
     image_display_url &&
     url &&
