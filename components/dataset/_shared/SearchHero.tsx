@@ -22,7 +22,7 @@ export default function SearchHero({
         >
           <div className="grid md:grid-cols-2 mx-auto items-center grow mx-auto custom-container bg-white">
             <div className="col-span-1">
-              <h1 className="text-[55px] font-black ">{title}</h1>
+              <h1 className="text-[34px] md:text-[55px] font-black ">{title}</h1>
             </div>
           </div>
         </div>

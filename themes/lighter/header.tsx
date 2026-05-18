@@ -85,13 +85,14 @@ export default function LighterThemeHeader() {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-4 py-4 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <span className="sr-only">Datopian</span>
+            <span className="sr-only">Culture Data Commons</span>
             <Link href="/" className="-m-1.5 p-1.5 inline-block md:hidden">
               <Image
-                src="/images/logos/logo.svg"
-                width={300}
-                height={86}
+                src="/logo.png"
+                width={273}
+                height={78}
                 alt="Portal"
+                className="max-w-[220px]"
               />
             </Link>
             <button
