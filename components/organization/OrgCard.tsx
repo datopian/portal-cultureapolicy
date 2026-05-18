@@ -16,28 +16,38 @@ export default function GroupCard({
   description,
   name,
 }: OrgCardProps) {
-  const url = image_display_url ? new URL(image_display_url) : undefined;
+  let url: URL | undefined;
+  if (image_display_url) {
+    try {
+      url = new URL(image_display_url);
+    } catch {
+      url = undefined;
+    }
+  }
+
+  const logoSrc =
+    image_display_url &&
+    url &&
+    (getConfig().publicRuntimeConfig.DOMAINS ?? []).includes(url.hostname)
+      ? image_display_url
+      : "/images/logos/DefaultOrgLogo.svg";
+
   return (
     <Link
       href={`/@${name}`}
       className="border-b-[4px] p-8 border-white  bg-white hover:bg-accent-50 group block border-b-[4px] hover:border-accent rounded-lg shadow-lg"
     >
       <div className=" col-span-3  h-full  flex flex-col ">
-        <Image
-          src={
-            image_display_url &&
-            url &&
-            (getConfig().publicRuntimeConfig.DOMAINS ?? []).includes(
-              url.hostname
-            )
-              ? image_display_url
-              : "/images/logos/DefaultOrgLogo.svg"
-          }
-          alt={`${name}-collection`}
-          width="43"
-          height="43"
-        ></Image>
-        <h3 className="font-inter font-semibold text-lg mt-4 group-hover:text-accent">
+        <div className="w-full h-20 mb-4 flex items-center">
+          <Image
+            src={logoSrc}
+            alt={`${name}-collection`}
+            width={320}
+            height={80}
+            className="w-full h-full object-contain object-left"
+          />
+        </div>
+        <h3 className="font-inter font-semibold text-lg group-hover:text-accent">
           {display_name}
         </h3>
         <p className="font-inter font-medium text-sm mt-1 mb-6 line-clamp-2">
